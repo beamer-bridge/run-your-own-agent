@@ -1,0 +1,35 @@
+version: '3.7'
+
+x-defaults: &defaults
+  image: ghcr.io/beamer-bridge/beamer-agent:0.1.1
+  env_file: .env
+  volumes:
+    - ./data:/data
+  logging:
+    driver: json-file
+    options:
+      max-size: "1024m"
+      max-file: "50"
+
+services:
+  agent-l2a-to-l2b:
+    << : *defaults
+    restart: always
+    command:
+    # the agent command is included in the ENTRYPOINT declaration
+      - "--password"
+      - "${PASSWORD}"
+      - "--keystore-file"
+      - "/data/account/${KEYSTORE_FILE}"
+      - "--l1-rpc-url"
+      - "${L1_RPC_URL}"
+      - "--l2a-rpc-url"
+      - "${L2A_RPC_URL}"
+      - "--l2b-rpc-url"
+      - "${L2B_RPC_URL}"
+      - "--log-level"
+      - "${LOG_LEVEL}"
+      - "--deployment-dir"
+      - "/data/deployment/${DEPLOYMENT_DIR}"
+      - "--token-match-file"
+      - "/data/tokens/${TOKEN_MATCH_FILE}"
