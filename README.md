@@ -18,14 +18,27 @@ Minimum recommended for a production setup:
 ### Software
 * Docker 18.06.0+, or an equivalent runtime with compose support
 
+### RPC endpoints
+
+You will need to configure RPC endpoints for both rollups you want to support,
+as well as the Ethereum L1. You can either [host a node
+yourself](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/)
+or use a service like [Infura](https://infura.io/). Regardless, each rollup RPC
+endpoint needs to be able to serve at least 200,000 agent's requests per day,
+and potentially more, depending on traffic. Please make sure that the chosen
+service is able to handle this.
+
 ### Account
 
 We recomment creating a new account which will only be used for this specific
 instance of the agent. This account needs:
-* L1 Eth, FIXME: amounts
+* At least 0.5 L1 ETH
 * Eth on both rollups, at least 9 ETH per rollup, though we recommend 36 ETH
-* Tokens used to fulfill transfer requests: at least 50,000 DAI per rollup,
-  recommended 200,000 DAI.
+* Tokens used to fulfill transfer requests: at least 50,000 USDC per rollup,
+  recommended 200,000 USDC.
+
+Additionally, make sure that your account is whitelisted for the mainnet deployment.
+If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
 
 ## Installation
@@ -40,18 +53,33 @@ instance of the agent. This account needs:
    git clone https://github.com/beamer-bridge/run-your-own-agent.git
    ```
 
-1. Copy `.env.template` to `.env` and modify the values to fit your setup.
-   Please read [Configuring the `.env` file](#configuring-the-env-file) for
-   detailed information.
+1. Download deployment information into the `data` directory:
 
-   - We recommend that you provide your own monitoring. The setup of which is
-     currently out of scope of this document.
-   - Please read the disclaimer for the agent carefully and uncomment the
-     variable `AGENT_ACCEPT_DISCLAIMER` if you agree. Note, that without
-     agreement the agent won't start.
+    ```shell
+    cd run-your-own-agent
+    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/heads/main.tar.gz |
+         tar xz -C data --wildcards --strip-components=1 beamer-main/deployments/*
+    ```
 
-1. Check that your account is whitelisted for the mainnet deployment. If not,
-   you can apply for whitelisting at hello@beamerbridge.com.
+    The above command will download Beamer contracts' deployment information which the
+    agent needs in order to run.
+
+1. Copy your account keyfile to `data/account`.
+
+1. Edit `data/agent.conf` and make sure that the following keys have correct values:
+
+   - `[account.path]` - the path to your account keyfile
+   - `[account.password]` - the password to unlock your kefile
+   - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
+   - `[chains.boba.rpc-url]` - the RPC endpoint to use for mainnet Boba (e.g. `https://replica.boba.network`)
+   - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
+
+   When configuring RPC endpoints, please consider rate limits that may be in
+   place since those may affect agent operation.
+
+   The default `data/agent.conf` file configures the agent to bridge USDC
+   between Boba and Optimism. For more details on various configuration options, please
+   refer to [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
 1. Run `docker compose up -d` to start all services.
    - The services are configured to automatically restart in case of a crash or
@@ -60,47 +88,5 @@ instance of the agent. This account needs:
 You are now running an agent for the Beamer bridge. Thank you and please
 [contact us](mailto:contact@beamerbridge.com) in case of any problems.
 
-## Configuring the `.env` file
-After cloning the repository the `.env` file needs to be configured. A template
-named `.env.template` is provided. Below you find a detailed list of the
-parameters to be set and their explanations.
-
-- `KEYSTORE_FILE`: The keystore file which has to be located in ./keystore .
-- `PASSWORD`: Password to decrypt the keystore file
-- `L1_RPC_URL`: Ethereum RPC URL for the L1 chain. This is used to communicate
-  with the Ethereum blockchain. You can either [host a node
-  yourself](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/)
-  or use a service like [Infura](https://infura.io/). Regardless, the agent
-  requires a minimum of 200,000 requests per day and potentially more depending
-  on traffic. Please make sure that the chosen service is able to handle this.
-- `L2A_RPC_URL`: Ethereum RPC URL for the first rollup. This is used to
-  communicate with the Ethereum blockchain. You can either [host a node
-  yourself](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/)
-  or use a service like [Infura](https://infura.io/). Regardless, the agent
-  requires a minimum of 200,000 requests per day and potentially more depending
-  on traffic. Please make sure that the chosen service is able to handle this.
-- `L2B_RPC_URL`: Ethereum RPC URL for the second rollup. This is used to
-  communicate with the Ethereum blockchain. You can either [host a node
-  yourself](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/)
-  or use a service like [Infura](https://infura.io/). Regardless, the agent
-  requires a minimum of 200,000 requests per day and potentially more depending
-  on traffic. Please make sure that the chosen service is able to handle this.
-- `LOG_LEVEL`: 'debug' or 'info' recommended
-- `DEPLOYMENT_DIR`: The directory that contains deployment information about the
-  contracts necessary for running the agent.
-- `TOKEN_MATCH_FILE`: The file that describes which tokens are considered
-  equivalent.
-
-
-### Deployment information
-The agent requires information about the set of smart contracts to use. This
-information is not bundled with the agent. Please download it from the release
-page of the agent.
-FIXME: Add link, or how do we distribute this?
-
-### Token match file
-The token match file contains information on which token contracts on L1 and L2s
-represent the same canonical token.
-
-FIXME: Do we want to provide an example or let people figure this out
-themselves?
+We recommend that you provide your own monitoring. Setting up agent monitoring
+is out of scope of this document.
