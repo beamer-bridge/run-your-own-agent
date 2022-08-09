@@ -66,7 +66,10 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
 1. Copy your JSON keystore file to `data/account`.
 
-1. Edit `data/agent.conf` and make sure that the following keys have correct values:
+
+### Mainnet configuration
+
+1. Edit `data/agent-mainnet.conf` and make sure that the following keys have correct values:
 
    - `[account.path]` - the path to your JSON keystore file
    - `[account.password]` - the password to unlock your keystore file
@@ -77,13 +80,56 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    When configuring RPC endpoints, please consider rate limits that may be in
    place since those may affect agent operation.
 
-   The default `data/agent.conf` file configures the agent to bridge USDC
+   The default `data/agent-mainnet.conf` file configures the agent to bridge USDC
    between Boba and Optimism. For more details on various configuration options, please
    refer to [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
-1. Run `docker compose up -d` to start all services.
-   - The services are configured to automatically restart in case of a crash or
-     reboot.
+
+### Testnet configuration
+
+1. Similarly to the mainnet configuration, edit `data/agent-rinkeby.conf` and make
+   sure that the following keys have correct values:
+
+   - `[account.path]` - the path to your JSON keystore file
+   - `[account.password]` - the password to unlock your keystore file
+   - `[chains.l1.rpc-url]` - the RPC endpoint to use for Rinkeby Ethereum
+
+   Other configuration settings are alredy prepared for testnet usage,
+   including the test token configuration.
+
+   The default `data/agent-rinkeby.conf` file configures the agent to bridge a
+   test token between Boba and Metis.
+
+   Note that you will also need to request whitelisting at hello@beamerbridge.com.
+
+## Running agents
+
+1. For mainnet, run:
+
+   ```
+   docker compose -f docker-compose-mainnet.yml up -d
+   ```
+
+   For testnet, run:
+
+   ```
+   docker compose -f docker-compose-rinkeby.yml up -d
+   ```
+
+   The services are configured to automatically restart in case of a crash or reboot.
+
+1. Check the logs to make sure everything went well and there are no errors.
+   For mainnet:
+
+   ```
+   docker compose -f docker-compose-mainnet.yml logs -f
+   ```
+
+   For testnet:
+
+   ```
+   docker compose -f docker-compose-rinkeby.yml logs -f
+   ```
 
 You are now running an agent for the Beamer bridge. Thank you and please
 [contact us](mailto:contact@beamerbridge.com) in case of any problems.
