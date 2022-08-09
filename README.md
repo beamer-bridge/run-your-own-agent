@@ -64,12 +64,12 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     The above command will download Beamer contracts' deployment information which the
     agent needs in order to run.
 
-1. Copy your account keyfile to `data/account`.
+1. Copy your JSON keystore file to `data/account`.
 
 1. Edit `data/agent.conf` and make sure that the following keys have correct values:
 
-   - `[account.path]` - the path to your account keyfile
-   - `[account.password]` - the password to unlock your kefile
+   - `[account.path]` - the path to your JSON keystore file
+   - `[account.password]` - the password to unlock your keystore file
    - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
    - `[chains.boba.rpc-url]` - the RPC endpoint to use for mainnet Boba (e.g. `https://replica.boba.network`)
    - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
