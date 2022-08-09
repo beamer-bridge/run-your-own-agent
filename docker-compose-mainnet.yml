@@ -15,10 +15,10 @@ services:
     << : *defaults
     restart: always
     # the agent command is included in the ENTRYPOINT declaration
-    command: --config /data/agent.conf --source-chain optimism --target-chain boba
+    command: --config /data/agent-mainnet.conf --source-chain optimism --target-chain boba
 
   agent-boba-to-optimism:
     << : *defaults
     restart: always
     # the agent command is included in the ENTRYPOINT declaration
-    command: --config /data/agent.conf --source-chain boba --target-chain optimism
+    command: --config /data/agent-mainnet.conf --source-chain boba --target-chain optimism
