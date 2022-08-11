@@ -58,7 +58,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     ```shell
     cd run-your-own-agent
     curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/heads/main.tar.gz |
-         tar xz -C data --wildcards --strip-components=1 beamer-main/deployments/*
+         tar xz -C data --strip-components=1 beamer-main/deployments
     ```
 
     The above command will download Beamer contracts' deployment information which the
