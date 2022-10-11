@@ -13,7 +13,6 @@ bridge network. Just follow the instructions below to get started.
 Minimum recommended for a production setup:
 * 2 Cores
 * 4 GiB RAM
-* 50 GiB storage
 
 ### Software
 * Docker 18.06.0+, or an equivalent runtime with compose support
