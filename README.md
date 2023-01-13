@@ -56,8 +56,8 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/heads/main.tar.gz |
-         tar xz -C data --strip-components=1 beamer-main/deployments
+    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v1.0.0.tar.gz |
+         tar xz -C data --strip-components=1 beamer-1.0.0/deployments
     ```
 
     The above command will download Beamer contracts' deployment information which the
@@ -73,7 +73,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    - `[account.path]` - the path to your JSON keystore file
    - `[account.password]` - the password to unlock your keystore file
    - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
-   - `[chains.boba.rpc-url]` - the RPC endpoint to use for mainnet Boba (e.g. `https://replica.boba.network`)
+   - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
    - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
 
    When configuring RPC endpoints, please consider rate limits that may be in
@@ -86,18 +86,20 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
 ### Testnet configuration
 
-1. Similarly to the mainnet configuration, edit `data/agent-rinkeby.conf` and make
+1. Similarly to the mainnet configuration, edit `data/agent-goerli.conf` and make
    sure that the following keys have correct values:
 
    - `[account.path]` - the path to your JSON keystore file
    - `[account.password]` - the password to unlock your keystore file
-   - `[chains.l1.rpc-url]` - the RPC endpoint to use for Rinkeby Ethereum
+   - `[chains.l1.rpc-url]` - the RPC endpoint to use for Goerli Ethereum
+   - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
+   - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
 
    Other configuration settings are alredy prepared for testnet usage,
    including the test token configuration.
 
-   The default `data/agent-rinkeby.conf` file configures the agent to bridge a
-   test token between Boba and Metis.
+   The default `data/agent-goerli.conf` file configures the agent to bridge a
+   test token between Optimism and Arbitrum.
 
    Note that you will also need to request whitelisting at hello@beamerbridge.com.
 
@@ -112,7 +114,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    For testnet, run:
 
    ```
-   docker compose -f docker-compose-rinkeby.yml up -d
+   docker compose -f docker-compose-goerli.yml up -d
    ```
 
    The services are configured to automatically restart in case of a crash or reboot.
@@ -127,7 +129,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    For testnet:
 
    ```
-   docker compose -f docker-compose-rinkeby.yml logs -f
+   docker compose -f docker-compose-goerli.yml logs -f
    ```
 
 You are now running an agent for the Beamer bridge. Thank you and please
