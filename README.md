@@ -80,7 +80,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    place since those may affect agent operation.
 
    The default `data/agent-mainnet.conf` file configures the agent to bridge USDC
-   between Boba and Optimism. For more details on various configuration options, please
+   between Arbitrum and Optimism. For more details on various configuration options, please
    refer to [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
 
