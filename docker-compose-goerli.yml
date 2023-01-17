@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-defaults: &defaults
-  image: ghcr.io/beamer-bridge/beamer-agent:v1.0.1
+  image: ghcr.io/beamer-bridge/beamer-agent:v1.0.2
   volumes:
     - ./data:/data
   logging:
