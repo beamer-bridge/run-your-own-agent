@@ -135,5 +135,8 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 You are now running an agent for the Beamer bridge. Thank you and please
 [contact us](mailto:contact@beamerbridge.com) in case of any problems.
 
+For more information on running an agent and updating to new agent versions,
+please refer to [documentation](https://docs.beamerbridge.com/running.html).
+
 We recommend that you provide your own monitoring. Setting up agent monitoring
 is out of scope of this document.
