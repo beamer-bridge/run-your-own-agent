@@ -11,14 +11,8 @@ x-defaults: &defaults
       max-file: "50"
 
 services:
-  goerli-optimism-to-arbitrum:
+  goerli-agent:
     << : *defaults
     restart: always
     # the agent command is included in the ENTRYPOINT declaration
     command: --config /data/agent-goerli.conf --source-chain optimism --target-chain arbitrum
-
-  goerli-arbitrum-to-optimism:
-    << : *defaults
-    restart: always
-    # the agent command is included in the ENTRYPOINT declaration
-    command: --config /data/agent-goerli.conf --source-chain arbitrum --target-chain optimism

@@ -11,14 +11,8 @@ x-defaults: &defaults
       max-file: "50"
 
 services:
-  agent-optimism-to-arbitrum:
+  mainnet-agent:
     << : *defaults
     restart: always
     # the agent command is included in the ENTRYPOINT declaration
     command: --config /data/agent-mainnet.conf --source-chain optimism --target-chain arbitrum
-
-  agent-arbitrum-to-optimism:
-    << : *defaults
-    restart: always
-    # the agent command is included in the ENTRYPOINT declaration
-    command: --config /data/agent-mainnet.conf --source-chain arbitrum --target-chain optimism
