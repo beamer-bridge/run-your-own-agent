@@ -33,8 +33,8 @@ We recomment creating a new account which will only be used for this specific
 instance of the agent. This account needs:
 * At least 0.5 L1 ETH
 * Eth on both rollups, at least 9 ETH per rollup, though we recommend 36 ETH
-* Tokens used to fulfill transfer requests: at least 50,000 USDC per rollup,
-  recommended 200,000 USDC.
+* Tokens used to fulfill transfer requests: at least 50,000 USDC or DAI per rollup,
+  recommended 200,000 USDC or DAI.
 
 Additionally, make sure that your account is whitelisted for the mainnet deployment.
 If it is not, you can apply for whitelisting at hello@beamerbridge.com.
@@ -79,9 +79,11 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    When configuring RPC endpoints, please consider rate limits that may be in
    place since those may affect agent operation.
 
-   The default `data/agent-mainnet.conf` file configures the agent to bridge USDC
-   between Arbitrum and Optimism. For more details on various configuration options, please
-   refer to [agent documentation](https://docs.beamerbridge.com/configuration.html).
+   The default `data/agent-mainnet.conf` file configures the agent to bridge USDC and DAI
+   between Arbitrum and Optimism. Please delete the lines for the other token in the 
+   configuration file if you only want to bridge one of the tokens. For more details on 
+   various configuration options, please refer to 
+   [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
 
 ### Testnet configuration
