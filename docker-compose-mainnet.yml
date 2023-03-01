@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-defaults: &defaults
-  image: ghcr.io/beamer-bridge/beamer-agent:v1.0.3
+  image: ghcr.io/beamer-bridge/beamer:v1.0.2-31-gee4fef6
   volumes:
     - ./data:/data
   logging:
@@ -15,4 +15,24 @@ services:
     << : *defaults
     restart: always
     # the agent command is included in the ENTRYPOINT declaration
-    command: --config /data/agent-mainnet.conf --source-chain optimism --target-chain arbitrum
+    command: agent --config /data/agent-mainnet.conf --source-chain optimism --target-chain arbitrum
+
+  health-check:
+    << : *defaults
+    restart: always
+    stdin_open: true
+    entrypoint: /bin/sh
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.heartbeat.schedule: "@every 6h"
+      ofelia.job-exec.heartbeat.no-overlap: "true"
+      ofelia.job-exec.heartbeat.command: "beamer health-check --config /data/beamer-health-check.conf"
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    restart: always
+    depends_on:
+      - health-check
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:r
