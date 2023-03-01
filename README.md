@@ -11,10 +11,12 @@ bridge network. Just follow the instructions below to get started.
 ### Hardware
 
 Minimum recommended for a production setup:
+
 * 2 Cores
 * 4 GiB RAM
 
 ### Software
+
 * Docker 18.06.0+, or an equivalent runtime with compose support
 
 ### RPC endpoints
@@ -29,8 +31,9 @@ service is able to handle this.
 
 ### Account
 
-We recomment creating a new account which will only be used for this specific
+We recommend creating a new account which will only be used for this specific
 instance of the agent. This account needs:
+
 * At least 0.5 L1 ETH
 * Eth on both rollups, at least 9 ETH per rollup, though we recommend 36 ETH
 * Tokens used to fulfill transfer requests: at least 50,000 USDC or DAI per rollup,
@@ -39,8 +42,8 @@ instance of the agent. This account needs:
 Additionally, make sure that your account is whitelisted for the mainnet deployment.
 If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
-
 ## Installation
+
 1. Provision a server that meets the hardware and software requirements listed
    above.
 
@@ -60,21 +63,20 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
          tar xz -C data --strip-components=1 beamer-1.0.3/deployments
     ```
 
-    The above command will download Beamer contracts' deployment information which the
-    agent needs in order to run.
+   The above command will download Beamer contracts' deployment information which the
+   agent needs in order to run.
 
 1. Copy your JSON keystore file to `data/account`.
-
 
 ### Mainnet configuration
 
 1. Edit `data/agent-mainnet.conf` and make sure that the following keys have correct values:
 
-   - `[account.path]` - the path to your JSON keystore file
-   - `[account.password]` - the password to unlock your keystore file
-   - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
-   - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
-   - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
+    - `[account.path]` - the path to your JSON keystore file
+    - `[account.password]` - the password to unlock your keystore file
+    - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
+    - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
+    - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
 
    When configuring RPC endpoints, please consider rate limits that may be in
    place since those may affect agent operation.
@@ -85,17 +87,16 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    various configuration options, please refer to 
    [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
-
 ### Testnet configuration
 
 1. Similarly to the mainnet configuration, edit `data/agent-goerli.conf` and make
    sure that the following keys have correct values:
 
-   - `[account.path]` - the path to your JSON keystore file
-   - `[account.password]` - the password to unlock your keystore file
-   - `[chains.l1.rpc-url]` - the RPC endpoint to use for Goerli Ethereum
-   - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
-   - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
+    - `[account.path]` - the path to your JSON keystore file
+    - `[account.password]` - the password to unlock your keystore file
+    - `[chains.l1.rpc-url]` - the RPC endpoint to use for Goerli Ethereum
+    - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
+    - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
 
    Other configuration settings are alredy prepared for testnet usage,
    including the test token configuration.
@@ -110,13 +111,13 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 1. For mainnet, run:
 
    ```
-   docker compose -f docker-compose-mainnet.yml up -d
+   docker compose -f docker-compose-mainnet.yml up -d mainnet-agent
    ```
 
    For testnet, run:
 
    ```
-   docker compose -f docker-compose-goerli.yml up -d
+   docker compose -f docker-compose-goerli.yml up -d goerli-agent
    ```
 
    The services are configured to automatically restart in case of a crash or reboot.
@@ -140,5 +141,13 @@ You are now running an agent for the Beamer bridge. Thank you and please
 For more information on running an agent and updating to new agent versions,
 please refer to [documentation](https://docs.beamerbridge.com/running.html).
 
-We recommend that you provide your own monitoring. Setting up agent monitoring
-is out of scope of this document.
+## Beamer health-check
+
+The beamer executable includes a health-check command that can be used to
+analyze the beamer contracts and also reports agent liquidity. The health-check command
+fetches all the event executed by the contracts and analyzes them to determine
+whether there are missed fills, unclaimed requests or challenges. The script will
+send a notification to telegram or rocketchat depending on the configuration.
+
+To find out how to configure the health-check, please refer to the health-check 
+[documentation](https://docs.beamerbridge.com/configuration.html#notification-system).
