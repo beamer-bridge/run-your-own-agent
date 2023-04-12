@@ -59,8 +59,8 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v1.0.3.tar.gz |
-         tar xz -C data --strip-components=1 beamer-1.0.3/deployments
+    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v2.0.0.tar.gz |
+         tar xz -C data --strip-components=1 beamer-2.0.0/deployments
     ```
 
    The above command will download Beamer contracts' deployment information which the
@@ -74,7 +74,8 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     - `[account.path]` - the path to your JSON keystore file
     - `[account.password]` - the password to unlock your keystore file
-    - `[chains.l1.rpc-url]` - the RPC endpoint to use for mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
+    - `[base-chain.rpc-url]` - the RPC endpoint to use for L1 resolution on mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
+    - `[chains.ethereum.rpc-url]` - the RPC endpoint to use for filling requests on mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
 
@@ -94,7 +95,8 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     - `[account.path]` - the path to your JSON keystore file
     - `[account.password]` - the password to unlock your keystore file
-    - `[chains.l1.rpc-url]` - the RPC endpoint to use for Goerli Ethereum
+    - `[base-chain.rpc-url]` - the RPC endpoint to use for L1 resolution on Goerli Ethereum
+    - `[chains.goerli.rpc-url]` - the RPC endpoint to use for filling requests on Goerli Ethereum
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
 
@@ -145,7 +147,7 @@ please refer to [documentation](https://docs.beamerbridge.com/running.html).
 
 The beamer executable includes a health-check command that can be used to
 analyze the beamer contracts and also reports agent liquidity. The health-check command
-fetches all the event executed by the contracts and analyzes them to determine
+fetches all the events emitted by the contracts and analyzes them to determine
 whether there are missed fills, unclaimed requests or challenges. The script will
 send a notification to telegram or rocketchat depending on the configuration.
 
