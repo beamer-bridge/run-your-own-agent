@@ -59,7 +59,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v2.0.0.tar.gz |
+    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v2.1.0.tar.gz |
          tar xz -C data --strip-components=1 beamer-2.0.0/deployments
     ```
 
