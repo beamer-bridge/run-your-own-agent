@@ -47,7 +47,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 1. Provision a server that meets the hardware and software requirements listed
    above.
 
-1. Clone the [current version of this
+2. Clone the [current version of this
    repository](https://github.com/beamer-bridge/run-your-own-agent) to
    a suitable location on the server.
 
@@ -55,18 +55,19 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
    git clone https://github.com/beamer-bridge/run-your-own-agent.git
    ```
 
-1. Download deployment information into the `data` directory:
+3. Download deployment information into the `data` directory:
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://github.com/beamer-bridge/beamer/archive/refs/tags/v2.1.0.tar.gz |
-         tar xz -C data --strip-components=1 beamer-2.1.0/deployments
+    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.0.1.tgz |
+         tar xz -C data --strip-components=1 package/dist
     ```
 
    The above command will download Beamer contracts' deployment information which the
    agent needs in order to run.
 
-1. Copy your JSON keystore file to `data/account`.
+4. Copy your JSON keystore file to `data/account`.
+
 
 ### Mainnet configuration
 
