@@ -32,12 +32,26 @@ service is able to handle this.
 ### Account
 
 We recommend creating a new account which will only be used for this specific
-instance of the agent. This account needs:
+instance of the agent. The amount of funding determines the amount of transfers an agent can fulfill per day.
 
-* At least 0.5 L1 ETH
-* Eth on both rollups, at least 9 ETH per rollup, though we recommend 36 ETH
-* Tokens used to fulfill transfer requests: at least 50,000 USDC or DAI per rollup,
-  recommended 200,000 USDC or DAI.
+This account needs 
+
+* ETH
+* Liquidity in tokens you wish to support
+
+The amount of ETH needed can be derived from the claimStake.
+
+Example (and our recommendation):
+
+* ETH on L1
+  * claimStake = 0.01 ETH (required per transfer)
+  * 200 transfers per day * claimStake = 2 ETH
+  * We highly recommend a L1 resolution buffer of an additional 0.5 ETH
+  * **recommended amount: 2.5 ETH**
+* ETH on L2s
+  * claimStake = 0.0015 ETH (required per transfer)
+  * 200 transfers per day * claimStake = 0.3 ETH
+  * **recommended amount: 0.3 ETH**
 
 Additionally, make sure that your account is whitelisted for the mainnet deployment.
 If it is not, you can apply for whitelisting at hello@beamerbridge.com.
