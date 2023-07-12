@@ -73,7 +73,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.0.1.tgz |
+    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.0.2.tgz |
          tar xz -C data --strip-components=1 package/dist
     ```
 
@@ -93,6 +93,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     - `[chains.ethereum.rpc-url]` - the RPC endpoint to use for filling requests on mainnet Ethereum (e.g. `https://mainnet.infura.io/v3/ID`)
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
+    - `[chains.polygon-zkevm.rpc-url]` - the RPC endpoint to use for mainnet Polygon zkEVM (e.g. `https://zkevm-rpc.com`)
 
    When configuring RPC endpoints, please consider rate limits that may be in
    place since those may affect agent operation.
@@ -114,6 +115,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     - `[chains.goerli.rpc-url]` - the RPC endpoint to use for filling requests on Goerli Ethereum
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
+    - `[chains.polygon-zkevm.rpc-url]` - the RPC endpoint to use for Goerli Polygon zkEVM
 
    Other configuration settings are alredy prepared for testnet usage,
    including the test token configuration.
