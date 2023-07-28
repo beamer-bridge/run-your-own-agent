@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-defaults: &defaults
-  image: ghcr.io/beamer-bridge/beamer:v2.4.0
+  image: ghcr.io/beamer-bridge/beamer:v2.5.0
   volumes:
     - ./data:/data
   logging:
