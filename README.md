@@ -73,7 +73,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.0.2.tgz |
+    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.1.0.tgz |
          tar xz -C data --strip-components=1 package/dist
     ```
 
