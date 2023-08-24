@@ -73,7 +73,7 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
 
     ```shell
     cd run-your-own-agent
-    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-2.1.0.tgz |
+    curl -sSfL https://registry.npmjs.org/@beamer-bridge/deployments/-/deployments-3.0.1.tgz |
          tar xz -C data --strip-components=1 package/dist
     ```
 
@@ -94,13 +94,14 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for mainnet Arbitrum (e.g. `https://arb1.arbitrum.io/rpc`)
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for mainnet Optimism (e.g. `https://mainnet.optimism.io`)
     - `[chains.polygon-zkevm.rpc-url]` - the RPC endpoint to use for mainnet Polygon zkEVM (e.g. `https://zkevm-rpc.com`)
+    - `[chains.base.rpc-url]` - the RPC endpoint to use for mainnet Base (e.g. `https://mainnet.base.org`)
 
    When configuring RPC endpoints, please consider rate limits that may be in
    place since those may affect agent operation.
 
-   The default `data/agent-mainnet.conf` file configures the agent to bridge USDC and DAI
-   between Arbitrum and Optimism. Please delete the lines for the other token in the 
-   configuration file if you only want to bridge one of the tokens. For more details on 
+   The default `data/agent-mainnet.conf` file configures the agent to bridge USDC, DAI, USDT and WETH
+   between the chains declared above (USDT is not available on Base). Please delete the lines for other tokens in the 
+   configuration file if you only want to bridge some of them. For more details on 
    various configuration options, please refer to 
    [agent documentation](https://docs.beamerbridge.com/configuration.html).
 
@@ -116,12 +117,13 @@ If it is not, you can apply for whitelisting at hello@beamerbridge.com.
     - `[chains.arbitrum.rpc-url]` - the RPC endpoint to use for Goerli Arbitrum
     - `[chains.optimism.rpc-url]` - the RPC endpoint to use for Goerli Optimism
     - `[chains.polygon-zkevm.rpc-url]` - the RPC endpoint to use for Goerli Polygon zkEVM
+    - `[chains.base.rpc-url]` - the RPC endpoint to use for Goerli Base (e.g. `	https://goerli.base.org`)
 
-   Other configuration settings are alredy prepared for testnet usage,
+   Other configuration settings are already prepared for testnet usage,
    including the test token configuration.
 
    The default `data/agent-goerli.conf` file configures the agent to bridge a
-   test token between Optimism and Arbitrum.
+   test token between the chains declared above.
 
    Note that you will also need to request whitelisting at hello@beamerbridge.com.
 
